@@ -11,7 +11,7 @@ public class ComptableController : Controller
 {
     private readonly ILogger<ComptableController> _logger;
     private readonly IComptableService _comptableService;
-    private const int PageSize = 10;
+    private const int PageSize = 3;
 
     public ComptableController(ILogger<ComptableController> logger, IComptableService comptableService)
     {

@@ -11,7 +11,7 @@ public class ClientController : Controller
 {
     private readonly ILogger<ClientController> _logger;
     private readonly IClientService _clientService;
-    private const int PageSize = 10;
+    private const int PageSize = 3;
 
     public ClientController(ILogger<ClientController> logger, IClientService clientService)
     {

@@ -10,7 +10,7 @@ public class ResponsableStockController : Controller
 {
     private readonly ILogger<ResponsableStockController> _logger;
     private readonly IResponsableStockService _rsService;
-    private const int PageSize = 10;
+    private const int PageSize = 3;
 
     public ResponsableStockController(ILogger<ResponsableStockController> logger, IResponsableStockService rsService)
     {
