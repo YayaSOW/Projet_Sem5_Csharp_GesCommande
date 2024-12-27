@@ -1,0 +1,45 @@
+@model gesCom.Models.Commande
+
+@{
+    ViewData["Title"] = "Préparer la commande";
+}
+
+<div class="card shadow-lg border-0 rounded-3 mb-5">
+    <div class="card-header bg-primary text-white">Préparer la commande #@Model.Id</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Client</dt>
+            <dd class="col-sm-9">@Model.Client.Nom @Model.Client.Prenom</dd>
+
+            <dt class="col-sm-3">Date</dt>
+            <dd class="col-sm-9">@Model.Date.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Montant</dt>
+            <dd class="col-sm-9">@Model.Montant.ToString("C")</dd>
+        </dl>
+
+        <h4>Produits à préparer</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detail in Model.DetailCommandes)
+                {
+                    <tr>
+                        <td>@detail.Produit.Libelle</td>
+                        <td>@detail.QteProduit</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form asp-action="ConfirmerPreparation" asp-route-id="@Model.Id" method="post">
+            <button type="submit" class="btn btn-success">Confirmer la préparation</button>
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+        </form>
+    </div>
+</div>

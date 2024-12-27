@@ -1,0 +1,88 @@
+@model gesCom.Models.Commande
+
+@{
+    ViewData["Title"] = "Suivre Commande";
+}
+
+<div class="card shadow-lg border-0 rounded-3 mb-5">
+    <div class="card-header bg-primary text-white">Suivre Commande #@Model.Id</div>
+    <div class="card-body">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <strong>@TempData["Message"]</strong>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                <strong>@TempData["Error"]</strong>
+            </div>
+        }
+        <dl class="row">
+            <dt class="col-sm-3">Date</dt>
+            <dd class="col-sm-9">@Model.Date.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Montant</dt>
+            <dd class="col-sm-9">@Model.Montant.ToString("C")</dd>
+
+            <dt class="col-sm-3">État</dt>
+            <dd class="col-sm-9">@Model.Etat</dd>
+        </dl>
+
+        <h4>Détails de la commande</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detail in Model.DetailCommandes)
+                {
+                    <tr>
+                        <td>@detail.Produit.Libelle</td>
+                        <td>@detail.QteProduit</td>
+                        <td>@detail.Prix.ToString("C")</td>
+                        <td>@((detail.QteProduit * detail.Prix).ToString("C"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (Model.Etat == Etat.Livrer)
+        {
+            <form asp-action="DeclarerReception" asp-route-id="@Model.Id" method="post">
+                <button type="submit" class="btn btn-success">Déclarer la réception</button>
+            </form>
+        }
+
+        @if (Model.Etat == Etat.Payer && Model.Paiements == null)
+        {
+            <h4 class="mt-4">Enregistrer le paiement</h4>
+            <form asp-action="EnregistrerPaiement" method="post">
+                <input type="hidden" name="commandeId" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="montant">Montant</label>
+                    <input type="number" name="montant" class="form-control" required step="0.01" />
+                </div>
+                <div class="form-group">
+                    <label for="reference">Référence</label>
+                    <input type="text" name="reference" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="type">Type de paiement</label>
+                    <select name="type" class="form-control" required>
+                        <option value="@TypePaiement.OM">Orange Money</option>
+                        <option value="@TypePaiement.Wave">Wave</option>
+                        <option value="@TypePaiement.Cheque">Chèque</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Enregistrer le paiement</button>
+            </form>
+        }
+    </div>
+</div>

@@ -1,0 +1,67 @@
+@model IEnumerable<gesCom.Models.Produit>
+
+@{
+    ViewData["Title"] = "Gérer les Produits";
+    int currentPage = ViewData["CurrentPage"] != null ? Convert.ToInt32(ViewData["CurrentPage"]) : 1;
+    int totalPages = ViewData["TotalPages"] != null ? Convert.ToInt32(ViewData["TotalPages"]) : 1;
+}
+
+<div class="card shadow-lg border-0 rounded-3 mb-5">
+    <div class="card-header bg-primary text-white">Gérer les Produits</div>
+    <div class="card-body">
+        <div class="my-3 d-flex justify-content-end">
+            <a class="btn btn-primary text-white" asp-action="NouveauProduit">Nouveau Produit</a>
+        </div>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <strong>@TempData["Message"]</strong>
+            </div>
+        }
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th scope="col">Libellé</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Quantité en stock</th>
+                        <th scope="col">Quantité seuil</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var produit in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => produit.Libelle)</td>
+                            <td>@Html.DisplayFor(modelItem => produit.Prix)</td>
+                            <td>@Html.DisplayFor(modelItem => produit.QteStock)</td>
+                            <td>@Html.DisplayFor(modelItem => produit.QteSeuil)</td>
+                            <td>
+                                <a asp-action="MettreAJourStock" asp-route-id="@produit.Id" class="btn btn-secondary btn-sm">Mettre à jour le stock</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation" class="d-flex justify-content-end mt-4">
+                <ul class="pagination">
+                    <li class="page-item @(currentPage > 1 ? "" : "disabled")">
+                        <a class="page-link" asp-action="GererProduits" asp-route-page="@(currentPage - 1)">&laquo;</a>
+                    </li>
+
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+                            <a class="page-link" asp-action="GererProduits" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+
+                    <li class="page-item @(currentPage < totalPages ? "" : "disabled")">
+                        <a class="page-link" asp-action="GererProduits" asp-route-page="@(currentPage + 1)">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

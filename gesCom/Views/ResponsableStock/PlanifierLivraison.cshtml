@@ -1,0 +1,35 @@
+@model gesCom.Models.Commande
+
+@{
+    ViewData["Title"] = "Planifier la livraison";
+}
+
+<div class="card shadow-lg border-0 rounded-3 mb-5">
+    <div class="card-header bg-primary text-white">Planifier la livraison - Commande #@Model.Id</div>
+    <div class="card-body">
+        <form asp-action="PlanifierLivraison" method="post">
+            <input type="hidden" name="commandeId" value="@Model.Id" />
+            <div class="form-group">
+                <label for="livreurId">Sélectionner un livreur</label>
+                <select name="livreurId" id="livreurId" class="form-control" required>
+                    @foreach (var livreur in ViewBag.Livreurs)
+                    {
+                        <option value="@livreur.Id">@livreur.Nom @livreur.Prenom</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dateLivraison">Date de livraison prévue</label>
+                <input type="date" id="dateLivraison" name="dateLivraison" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse de livraison</label>
+                <input type="text" id="adresse" name="adresse" class="form-control" required value="@Model.Client.Adresse" />
+            </div>
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Planifier la livraison</button>
+                <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </form>
+    </div>
+</div>

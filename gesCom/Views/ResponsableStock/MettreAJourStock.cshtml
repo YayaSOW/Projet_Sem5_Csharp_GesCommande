@@ -1,0 +1,26 @@
+@model gesCom.Models.Produit
+
+@{
+    ViewData["Title"] = "Mettre à jour le stock";
+}
+
+<div class="card shadow-lg border-0 rounded-3 mb-5">
+    <div class="card-header bg-primary text-white">Mettre à jour le stock - @Model.Libelle</div>
+    <div class="card-body">
+        <form asp-action="MettreAJourStock">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label class="control-label">Quantité actuelle en stock</label>
+                <input class="form-control" value="@Model.QteStock" readonly />
+            </div>
+            <div class="form-group">
+                <label for="quantite" class="control-label">Quantité à ajouter</label>
+                <input type="number" id="quantite" name="quantite" class="form-control" required />
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Mettre à jour" class="btn btn-primary" />
+                <a asp-action="GererProduits" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </form>
+    </div>
+</div>
