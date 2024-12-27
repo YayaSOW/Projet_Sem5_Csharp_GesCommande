@@ -18,6 +18,7 @@ public class LoginController : Controller
 
     public IActionResult Index()
     {
+        ViewData["HideNavBar"] = true;
         return View();
     }
 
@@ -50,6 +51,6 @@ public class LoginController : Controller
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Login");
     }
 }

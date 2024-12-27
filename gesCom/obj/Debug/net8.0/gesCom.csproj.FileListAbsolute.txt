@@ -108,3 +108,4 @@ C:\Users\USER\OneDrive\Desktop\Cours L3\C#\Projet\GesCommande\gesCom\bin\Debug\n
 C:\Users\USER\OneDrive\Desktop\Cours L3\C#\Projet\GesCommande\gesCom\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\USER\OneDrive\Desktop\Cours L3\C#\Projet\GesCommande\gesCom\obj\Debug\net8.0\gesCom.csproj.AssemblyReference.cache
 C:\Users\USER\OneDrive\Desktop\Cours L3\C#\Projet\GesCommande\gesCom\obj\Debug\net8.0\gesCom.csproj.Up2Date
+C:\Users\USER\OneDrive\Desktop\Cours L3\C#\Projet\GesCommande\gesCom\obj\Debug\net8.0\gesCom.sourcelink.json

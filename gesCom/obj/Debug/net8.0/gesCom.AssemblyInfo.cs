@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gesCom")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b4a76a87a85383c7e0d59b6be492bc0962b9a87")]
 [assembly: System.Reflection.AssemblyProductAttribute("gesCom")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gesCom")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
